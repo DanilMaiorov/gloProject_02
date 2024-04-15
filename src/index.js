@@ -1,7 +1,4 @@
-import one from "./modules/one";
-import two from "./modules/two";
+import timer from "./modules/timer";
 
-
-one();
-two();
+timer("30 april 2024");
 console.log("main.js");
