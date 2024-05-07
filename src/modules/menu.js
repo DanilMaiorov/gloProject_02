@@ -4,13 +4,9 @@ const menu = () => {
   const closeBtn = menu.querySelector(".close-btn");
   let menuItems = menu.querySelectorAll("li > a");
 
-  const bbb = document.querySelector('main > a');
+  const nextSlideBtn = document.querySelector('main > a');
 
-  console.log(bbb);
-
-  menuItems = [...menuItems, bbb];
-
-  console.log(menuItems);
+  menuItems = [...menuItems, nextSlideBtn];
 
   const handleMenu = () => {
     menu.classList.toggle("active-menu");
