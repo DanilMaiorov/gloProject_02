@@ -32,8 +32,6 @@ const modal = () => {
   }
 
   function modalAnimCloser() {
-    modal.style.opacity = "0";
-    modalContent.style.left = "103%";
     animate({
       duration: 500,
       timing: quad,
