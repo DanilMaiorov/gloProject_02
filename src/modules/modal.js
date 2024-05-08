@@ -1,41 +1,61 @@
+import { animate } from './others';
+
 const modal = () => {
   const buttons = document.querySelectorAll(".popup-btn");
   const modal = document.querySelector(".popup");
   const modalContent = document.querySelector(".popup-content");
   const modalCLose = modal.querySelector(".popup-close");
 
-  modalContent.style.left = "-30%";
-  modal.style.opacity = "0";
+  function quad(timeFraction) {
+    return Math.pow(timeFraction, 0.7);
+  }
 
-  const modalAnimOpener = () => {
-    modal.style.display = "block";
-    modal.style.transition = "0.5s all";
-    modalContent.style.transition = "0.5s all";
-    setTimeout(() => {
+  function modalOpener(percent) {
+    modalContent.style.left = percent;
+    modal.style.opacity = "0";
+    if (document.documentElement.clientWidth > 768) {
+      animate({
+        duration: 500,
+        timing: quad,
+        draw(progress) {
+          modal.style.display = "block";
+          modal.style.opacity = progress;
+          modalContent.style.left = `${progress * 38}%`;
+        }
+      });
+    } else {
+      cancelAnimationFrame(animate);
+      modal.style.display = "block";
       modal.style.opacity = "1";
-      modalContent.style.left = "38%";
-    }, 0);
-    modal.style.transition = "0.5s all";
-  };
-  const modalAnimCloser = () => {
+      modalContent.style.left = percent;
+    }
+  }
+
+  function modalAnimCloser() {
     modal.style.opacity = "0";
     modalContent.style.left = "103%";
-    setTimeout(() => {
+    animate({
+      duration: 500,
+      timing: quad,
+      draw(progress) {
+        modal.style.opacity = 1 - progress;
+        modalContent.style.left = `${38 + progress * 65}%`;
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 500);
+      }
+    });
+    if (document.documentElement.clientWidth < 768) {
       modal.style.display = "none";
-      modalContent.style.left = "-30%";
-    }, 500);
-  };
-  const modalOpener = percent => {
-    modal.style.opacity = "1";
-    modalContent.style.left = percent;
-    modal.style.display = "block";
-  };
+      cancelAnimationFrame(animate);
+    }
+  }
 
   buttons.forEach(i => {
     i.addEventListener('click', () => {
       if (document.documentElement.clientWidth > 768) {
-        modalAnimOpener();
-      } else if (document.documentElement.clientWidth < 768 && document.documentElement.clientWidth > 500) {
+        modalOpener("-30%");
+      }  else if (document.documentElement.clientWidth < 768 && document.documentElement.clientWidth > 500) {
         modalOpener("30%");
       } else if (document.documentElement.clientWidth < 500 && document.documentElement.clientWidth > 448) {
         modalOpener("18%");
@@ -46,11 +66,7 @@ const modal = () => {
   });
 
   modalCLose.addEventListener('click', () => {
-    if (document.documentElement.clientWidth > 768) {
-      modalAnimCloser();
-    } else {
-      modal.style.display = "none";
-    }
+    modalAnimCloser();
   });
 
 };
