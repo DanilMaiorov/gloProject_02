@@ -11,5 +11,5 @@ import validation from "./modules/validation";
 menu();
 modal();
 
-slider(".portfolio-2content", ".portfolio-item", "portfolio-item-active", "dot-active");
+slider(".portfolio-content", ".portfolio-iotem", "portfolio-item-active", "dot-active");
 validation();

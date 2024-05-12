@@ -27,17 +27,17 @@ const slider = (sliderBlockClass = ".portfolio-content", sliderItemClass = ".por
   } else {
     trueFalse.push(false);
   }
-  slides.forEach(item => {
-    if (item.className) {
-      trueFalse.push(true);
-    } else {
-      trueFalse.push(false);
-    }
-  });
+
+  if (slides.length) {
+    trueFalse.push(true);
+  } else {
+    trueFalse.push(false);
+  }
 
   const haveWeAClass = trueFalse.every(item => { 
-    return item
+    return item;
   });
+
 
   if (haveWeAClass) {
     let currentSlide = 0;
@@ -109,7 +109,7 @@ const slider = (sliderBlockClass = ".portfolio-content", sliderItemClass = ".por
     startSlide(timeInterval);
     dotsCreator();
   } else {
-    dotsCreator();
+
     return;
   }
 };
