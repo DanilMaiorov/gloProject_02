@@ -10,7 +10,7 @@ const menu = () => {
   menuItems = [...menuItems, nextSlideBtn];
 
   const toggleMenu = () => {
-    body.addEventListener('click', (e) => {
+    body.addEventListener('click', e => {
       if (e.target.closest('.menu')) {
         menu.classList.add('active-menu');
       } else if (e.target.closest('.close-btn')) {

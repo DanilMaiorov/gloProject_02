@@ -19,7 +19,7 @@ const validation = () => {
   // регулярки на проверки:
   // проверка только числового поля
   const testNumber = /\D+/g;
-    // проверка поля с текстом
+  // проверка поля с текстом
   const testText = /[^а-яА-Я\-\s]+/g;
   // проверка поля с телефоном
   const testTel = /[^0-9()]+/gi;
@@ -31,31 +31,6 @@ const validation = () => {
   textInputs.forEach(input => validFunc(input, testText));
   telInputs.forEach(input => validFunc(input, testTel));
   emailInputs.forEach(input => validFunc(input, testEmail));
-
-
-
-  //   const validFunc = (input, test) => {
-
-  //   input.addEventListener("blur", e => {
-  //     e.target.value = e.target.value.replace(test, "");
-  //   });
-  // };
-
-  // // регулярки на проверки:
-  // // проверка только числового поля
-  // const testNumber = /\D+/g;
-  //   // проверка поля с текстом
-  // const testText = /[^а-яА-Я\-\s]+/g;
-  // // проверка поля с телефоном
-  // const testTel = /[^0-9()]+/gi;
-  // // проверка поля с имейлом
-  // const testEmail = /[^a-zA-Z0-9\@-_.!~*']+/gi;
-
-
-  // numberInputs.forEach(input => validFunc(input, testNumber));
-  // textInputs.forEach(input => validFunc(input, testText));
-  // telInputs.forEach(input => validFunc(input, testTel));
-  // emailInputs.forEach(input => validFunc(input, testEmail));
 
 };
 export default validation;

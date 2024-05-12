@@ -63,7 +63,7 @@ const modal = () => {
   });
 
 
-  modal.addEventListener('click', (e) => {
+  modal.addEventListener('click', e => {
     if (!e.target.closest(".popup-content") || e.target.classList.contains("popup-close")) modalCloser();
   });
 
