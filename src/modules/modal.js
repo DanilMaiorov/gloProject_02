@@ -4,7 +4,6 @@ const modal = () => {
   const buttons = document.querySelectorAll(".popup-btn");
   const modal = document.querySelector(".popup");
   const modalContent = document.querySelector(".popup-content");
-  const modalCLose = modal.querySelector(".popup-close");
 
   function quad(timeFraction) {
     return Math.pow(timeFraction, 0.7);
@@ -31,7 +30,7 @@ const modal = () => {
     }
   }
 
-  function modalAnimCloser() {
+  function modalCloser() {
     animate({
       duration: 500,
       timing: quad,
@@ -63,8 +62,9 @@ const modal = () => {
     });
   });
 
-  modalCLose.addEventListener('click', () => {
-    modalAnimCloser();
+
+  modal.addEventListener('click', (e) => {
+    if (!e.target.closest(".popup-content") || e.target.classList.contains("popup-close")) modalCloser();
   });
 
 };

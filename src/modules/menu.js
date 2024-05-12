@@ -1,36 +1,38 @@
-const menu = () => {
-  const menuBtn = document.querySelector(".menu");
-  const menu = document.querySelector("menu");
-  const closeBtn = menu.querySelector(".close-btn");
-  let menuItems = menu.querySelectorAll("li > a");
 
+
+
+const menu = () => {
+  const menu = document.querySelector('menu');
+  let menuItems = menu.querySelectorAll('li > a');
   const nextSlideBtn = document.querySelector("main > a");
+  const body = document.querySelector('body');
 
   menuItems = [...menuItems, nextSlideBtn];
 
-  const handleMenu = () => {
-    menu.classList.toggle("active-menu");
-  };
-
-  menuBtn.addEventListener('click', handleMenu);
-  closeBtn.addEventListener('click', handleMenu);
-
-  menuItems.forEach(i => {
-    i.addEventListener('click', e => {
-      e.preventDefault();
-      let anchor;
-      if (e.target.tagName !== "IMG") {
-        anchor = e.target.getAttribute("href");
-        handleMenu();
-      } else {
-        anchor = e.target.parentNode.getAttribute("href");
+  const toggleMenu = () => {
+    body.addEventListener('click', (e) => {
+      if (e.target.closest('.menu')) {
+        menu.classList.add('active-menu');
+      } else if (e.target.closest('.close-btn')) {
+        menu.classList.remove('active-menu');
+      } else if (e.target.closest('menu') || e.target.closest('main > a')) {
+        menuItems.forEach(menuItem => {
+          if (menuItem === e.target || e.target.tagName === "IMG") {
+            e.preventDefault();
+            let anchor = menuItem.getAttribute('href');
+            document.querySelector(anchor).scrollIntoView({
+              block: 'start',
+              behavior: 'smooth'
+            });
+            menu.classList.remove('active-menu');
+          }
+        });
+      } else if (!e.target.closest('menu')) {
+        menu.classList.remove('active-menu');
       }
-      document.querySelector(anchor).scrollIntoView({
-        block: "start",
-        behavior: "smooth"
-      });
     });
-  });
+  };
+  toggleMenu();
 };
 
 export default menu;
